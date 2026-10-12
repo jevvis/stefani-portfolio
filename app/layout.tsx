@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Oswald } from 'next/font/google'
 import './globals.css'
-import ContactModal from '@/components/ContactModal'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,12 +13,12 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: 'Jevvi Supratama | Portfolio',
-  description: 'Software Developer & IT Professional — Web Development, Software Testing, IT Operations',
-  keywords: ['Jevvi Supratama', 'portfolio', 'web developer', 'software tester'],
+  title: 'Stefani Auria Putri Winata | Portfolio Industrial Engineering',
+  description: 'Industrial Engineering Graduate | Quality Control & Continuous Improvement — Universitas Brawijaya',
+  keywords: ['Stefani Auria Putri Winata', 'Industrial Engineering', 'Teknik Industri', 'Quality Control', 'Universitas Brawijaya', 'FMEA', 'Supply Chain', 'PPC'],
   openGraph: {
-    title: 'Jevvi Supratama | Portfolio',
-    description: 'Software Developer & IT Professional',
+    title: 'Stefani Auria Putri Winata | Portfolio Industrial Engineering',
+    description: 'Industrial Engineering Graduate | Quality Control & Continuous Improvement',
     type: 'website',
   },
 }
@@ -51,7 +50,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${oswald.variable} font-sans antialiased`}>
         {children}
-        <ContactModal />
       </body>
     </html>
   )

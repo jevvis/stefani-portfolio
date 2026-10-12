@@ -1,24 +1,51 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import WorkGallery from '@/components/WorkGallery'
-import { SkillsSection, AboutSection, AwardsSection, TrainingsSection } from '@/components/Sections'
+import {
+  AboutSection,
+  EducationSection,
+  TrainingsSection,
+  AwardsSection,
+  SkillsSection,
+  PersonalSkillsSection,
+} from '@/components/Sections'
 import Contact from '@/components/Contact'
+import FadeInSection from '@/components/FadeInSection'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <WorkGallery />
-      <SkillsSection />
-      <AboutSection />
-      <AwardsSection />
-      <TrainingsSection />
+      <FadeInSection>
+        <AboutSection />
+      </FadeInSection>
+      <FadeInSection>
+        <EducationSection />
+      </FadeInSection>
+      <FadeInSection>
+        <TrainingsSection />
+      </FadeInSection>
+      <FadeInSection>
+        <WorkGallery />
+      </FadeInSection>
+      <FadeInSection>
+        <AwardsSection />
+      </FadeInSection>
+      <FadeInSection>
+        <SkillsSection />
+      </FadeInSection>
+      <FadeInSection>
+        <PersonalSkillsSection />
+      </FadeInSection>
+      <FadeInSection>
+        <Contact />
+      </FadeInSection>
       
       {/* Footer */}
       <footer className="py-8 px-4 text-center border-t border-[var(--card-border)]">
         <p className="text-[var(--muted)] text-sm">
-          © {new Date().getFullYear()} Jevvi Supratama. All rights reserved.
+          © {new Date().getFullYear()} Stefani Auria Putri Winata. All rights reserved.
         </p>
       </footer>
     </main>

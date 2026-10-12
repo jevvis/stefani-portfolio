@@ -2,8 +2,8 @@ import Navbar from '@/components/Navbar'
 import Contact from '@/components/Contact'
 
 export const metadata = {
-  title: 'Contact | Jevvi Supratama',
-  description: 'Get in touch with Jevvi Supratama',
+  title: 'Kontak | Stefani Auria Putri Winata',
+  description: 'Hubungi Stefani Auria Putri Winata — Industrial Engineering Graduate',
 }
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
       {/* Footer */}
       <footer className="py-8 px-4 text-center border-t border-[var(--card-border)]">
         <p className="text-[var(--muted)] text-sm">
-          © {new Date().getFullYear()} Jevvi Supratama. All rights reserved.
+          © {new Date().getFullYear()} Stefani Auria Putri Winata. All rights reserved.
         </p>
       </footer>
     </main>
