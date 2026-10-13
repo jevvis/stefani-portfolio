@@ -24,10 +24,10 @@ export default function Home() {
         <EducationSection />
       </FadeInSection>
       <FadeInSection>
-        <TrainingsSection />
+        <WorkGallery />
       </FadeInSection>
       <FadeInSection>
-        <WorkGallery />
+        <TrainingsSection />
       </FadeInSection>
       <FadeInSection>
         <AwardsSection />

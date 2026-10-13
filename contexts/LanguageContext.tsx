@@ -26,12 +26,11 @@ const translations: Record<Language, Record<string, string>> = {
     // ── Navbar
     'nav.about': 'TENTANG SAYA',
     'nav.education': 'PENDIDIKAN',
-    'nav.org': 'ORGANISASI',
     'nav.work': 'MAGANG',
+    'nav.org': 'ORGANISASI',
     'nav.awards': 'SERTIFIKASI',
-    'nav.skills': 'TEKNIS',
-    'nav.personal': 'PERSONAL & SOFTWARE',
-    'nav.contact': 'Hubungi Saya',
+    'nav.skills': 'KEAHLIAN',
+    'nav.contact': 'HUBUNGI SAYA',
 
     // ── Hero
     'hero.scroll': 'GULIR KE BAWAH',
@@ -219,12 +218,11 @@ const translations: Record<Language, Record<string, string>> = {
     // ── Navbar
     'nav.about': 'ABOUT',
     'nav.education': 'EDUCATION',
-    'nav.org': 'ORGANIZATIONS',
     'nav.work': 'INTERNSHIP',
+    'nav.org': 'ORGANIZATIONS',
     'nav.awards': 'CERTIFICATIONS',
-    'nav.skills': 'TECHNICAL',
-    'nav.personal': 'PERSONAL & SOFTWARE',
-    'nav.contact': 'Contact Me',
+    'nav.skills': 'SKILLS',
+    'nav.contact': 'CONTACT ME',
 
     // ── Hero
     'hero.scroll': 'SCROLL DOWN',

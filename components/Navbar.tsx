@@ -8,11 +8,10 @@ import { useLanguage } from '@/contexts/LanguageContext'
 const mainLinkKeys = [
   { key: 'nav.about', id: 'about', href: '/#about' },
   { key: 'nav.education', id: 'education', href: '/#education' },
-  { key: 'nav.org', id: 'trainings', href: '/#trainings' },
   { key: 'nav.work', id: 'work', href: '/#work' },
+  { key: 'nav.org', id: 'trainings', href: '/#trainings' },
   { key: 'nav.awards', id: 'awards', href: '/#awards' },
   { key: 'nav.skills', id: 'skills', href: '/#skills' },
-  { key: 'nav.personal', id: 'personal-skills', href: '/#personal-skills' },
 ]
 
 const projectLinks = [
@@ -65,12 +64,12 @@ export default function Navbar() {
     : mainLinkKeys.map(l => ({ label: t(l.key), href: l.href, id: l.id }))
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl">
-      <nav className="flex items-center justify-between px-3.5 sm:px-5 py-2 rounded-full bg-[var(--background)]/85 backdrop-blur-xl border border-[var(--card-border)] shadow-lg transition-all">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-5xl">
+      <nav className="flex items-center justify-between px-3.5 sm:px-5 py-2.5 rounded-full bg-[var(--background)]/85 backdrop-blur-xl border border-[var(--card-border)] shadow-lg transition-all">
         {/* Logo */}
         <a
           href="/"
-          className="flex items-center gap-2.5 shrink-0 pr-3 lg:pr-5 group"
+          className="flex items-center gap-2.5 shrink-0 pr-2 lg:pr-4 group"
           onClick={(e) => {
             if (!isProjectSection && pathname === '/') {
               e.preventDefault()
@@ -86,7 +85,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center justify-center flex-1 gap-1.5 xl:gap-3 2xl:gap-4 px-1 xl:px-3">
+        <div className="hidden lg:flex items-center justify-center flex-1 gap-2 xl:gap-4 px-2">
           {currentLinks.map((link) => (
             <a
               key={link.label}
@@ -98,7 +97,7 @@ export default function Navbar() {
                   handleNavClick(e, link.href)
                 }
               }}
-              className={`whitespace-nowrap text-[10.5px] xl:text-[11.5px] tracking-wider font-semibold px-2 py-1 rounded-full transition-all hover:text-[var(--foreground)] ${
+              className={`whitespace-nowrap text-[11px] xl:text-[12px] tracking-wider font-semibold px-2.5 py-1 rounded-full transition-all hover:text-[var(--foreground)] ${
                 isProjectSection && link.label.toLowerCase() === activeProjectTab
                   ? 'text-[var(--foreground)] bg-[var(--foreground)]/10'
                   : 'text-[var(--muted)] hover:bg-[var(--foreground)]/5'
