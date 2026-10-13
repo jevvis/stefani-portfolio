@@ -1612,18 +1612,12 @@ export function PersonalSkillsSection() {
           {/* Left Column: Soft Skills */}
           <div className="lg:col-span-6 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-8 md:p-10 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--card-border)]">
+              <div className="mb-8 pb-4 border-b border-[var(--card-border)]">
                 <div>
                   <span className="text-[10px] font-sans tracking-widest uppercase text-emerald-500 font-semibold block mb-1">
                     {t('personal.soft.label')}
                   </span>
                   <h3 className="text-2xl font-bold">{t('personal.soft.title')}</h3>
-                </div>
-                <div className="w-12 h-12 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center text-emerald-500">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
                 </div>
               </div>
 
@@ -1649,15 +1643,12 @@ export function PersonalSkillsSection() {
           {/* Right Column: Software & Tools */}
           <div className="lg:col-span-6 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-8 md:p-10 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--card-border)]">
+              <div className="mb-8 pb-4 border-b border-[var(--card-border)]">
                 <div>
                   <span className="text-[10px] font-sans tracking-widest uppercase text-emerald-500 font-semibold block mb-1">
                     {t('personal.hard.label')}
                   </span>
                   <h3 className="text-2xl font-bold">{t('personal.hard.title')}</h3>
-                </div>
-                <div className="w-12 h-12 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center text-emerald-500 font-bold">
-                  💻
                 </div>
               </div>
 
