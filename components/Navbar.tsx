@@ -64,12 +64,12 @@ export default function Navbar() {
     : mainLinkKeys.map(l => ({ label: t(l.key), href: l.href, id: l.id }))
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-5xl">
-      <nav className="flex items-center justify-between px-3.5 sm:px-5 py-2.5 rounded-full bg-[var(--background)]/85 backdrop-blur-xl border border-[var(--card-border)] shadow-lg transition-all">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-5xl">
+      <nav className="flex items-center justify-between px-4 sm:px-6 py-2 rounded-full bg-[var(--background)]/85 backdrop-blur-xl border border-[var(--card-border)] shadow-lg transition-all">
         {/* Logo */}
         <a
           href="/"
-          className="flex items-center gap-2.5 shrink-0 pr-2 lg:pr-4 group"
+          className="flex items-center gap-2.5 shrink-0 group"
           onClick={(e) => {
             if (!isProjectSection && pathname === '/') {
               e.preventDefault()
@@ -85,7 +85,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center justify-center flex-1 gap-2 xl:gap-4 px-2">
+        <div className="hidden lg:flex items-center justify-center flex-1 gap-2 xl:gap-4 px-3">
           {currentLinks.map((link) => (
             <a
               key={link.label}
@@ -109,7 +109,7 @@ export default function Navbar() {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-1.5 shrink-0 pl-3 lg:pr-1">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 pl-2">
           {/* Language Toggle */}
           <button
             onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
@@ -126,7 +126,7 @@ export default function Navbar() {
           <a
             href="/#contact"
             onClick={(e) => handleNavClick(e, '/#contact')}
-            className="whitespace-nowrap px-4 sm:px-5 py-2 text-xs font-semibold tracking-wider rounded-full bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity shadow-sm"
+            className="whitespace-nowrap px-4 py-2 text-xs font-semibold tracking-wider rounded-full bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity shadow-sm"
           >
             {t('nav.contact')}
           </a>
