@@ -2,48 +2,7 @@
 
 import { useState } from 'react'
 import TypewriterTitle from './TypewriterTitle'
-
-const internships = [
-  {
-    number: '01',
-    role: 'Production Intern',
-    institution: 'CV. Pangan Berkah Sentosa (PBS)',
-    location: 'Jawa Timur, Indonesia',
-    period: 'Februari — Maret 2025',
-    subtitle: 'Manufaktur Industri Pangan — Cheese Dumpling Production Line 4',
-    description:
-      'Mengamati dan menganalisis seluruh alur proses produksi Cheese Dumpling pada Line 4, mulai dari penyiapan bahan baku, pencampuran adonan, proses pencetakan, hingga tahap pengemasan. Memastikan setiap tahapan berjalan sesuai standar efisiensi lini manufaktur.',
-    tags: ['Line 4 Production', 'Process Observation', 'Raw Material Prep', 'Food Manufacturing', 'Packaging Process', 'SOP Compliance'],
-    images: ['/projects/production.jpg', '/projects/biofarma-industry.jpg', '/projects/pharmacy-qc.jpg'],
-    align: 'right' as const,
-  },
-  {
-    number: '02',
-    role: 'Quality Risk & FMEA Analysis',
-    institution: 'CV. Pangan Berkah Sentosa (PBS)',
-    location: 'Jawa Timur, Indonesia',
-    period: 'Februari — Maret 2025',
-    subtitle: 'Identifikasi Defect Mutu & Failure Mode and Effect Analysis (FMEA)',
-    description:
-      'Mengidentifikasi dan mengkaji empat jenis cacat kualitas utama: bentuk tidak teratur (irregular shapes), lubang (holes), kebocoran (leakage), dan produk pecah (broken products). Melakukan analisis risiko kualitas menggunakan metode FMEA dengan menentukan failure modes, akar penyebab, dampak kecacatan, serta prioritas risiko (RPN).',
-    tags: ['FMEA Analysis', 'Defect Identification', 'Leakage & Hole Reduction', 'Risk Priority Number (RPN)', 'Root Cause Analysis', 'Quality Assurance'],
-    images: ['/projects/pharmacy-qc.jpg', '/projects/rfid-system.jpg', '/projects/production.jpg'],
-    align: 'left' as const,
-  },
-  {
-    number: '03',
-    role: 'Yield & Efficiency Evaluation',
-    institution: 'CV. Pangan Berkah Sentosa (PBS)',
-    location: 'Jawa Timur, Indonesia',
-    period: 'Februari — Maret 2025',
-    subtitle: 'Monitoring Yield, Reject Produk & Rekomendasi Continuous Improvement',
-    description:
-      'Memantau dan merekapitulasi data yield produksi, reject produk, serta sisa adonan secara sistematis sebagai dasar evaluasi efisiensi lini produksi. Berkoordinasi aktif dengan tim Produksi dan Quality Control untuk menganalisis faktor penyebab cacat dan menyusun rekomendasi perbaikan kualitas produk berkelanjutan.',
-    tags: ['Yield Monitoring', 'Reject Rate Reduction', 'Dough Scrap Analysis', 'Production Efficiency', 'Team Coordination', 'Continuous Improvement'],
-    images: ['/projects/biofarma-industry.jpg', '/projects/production.jpg', '/projects/docutrack.jpg'],
-    align: 'right' as const,
-  },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
 
 function InternshipImageStack({
   images,
@@ -61,9 +20,6 @@ function InternshipImageStack({
     setActiveIndex((prev) => (prev + 1) % images.length)
   }
 
-  // Direction of the stacked peek:
-  // If align is right: peek to top-left (-x, -y)
-  // If align is left: peek to top-right (+x, -y)
   const isRight = align === 'right'
   const xSign = isRight ? -1 : 1
   const rotSign = isRight ? -1 : 1
@@ -98,21 +54,19 @@ function InternshipImageStack({
             opacity = 0.88
             filter = isHovered ? 'brightness(0.92)' : 'brightness(0.82)'
           } else if (offset === 2) {
-            const tx = isHovered ? xSign * 32 : xSign * 22
-            const ty = isHovered ? -32 : -22
-            const rot = isHovered ? rotSign * 7 : rotSign * 4.5
+            const tx = isHovered ? xSign * 34 : xSign * 24
+            const ty = isHovered ? -34 : -24
+            const rot = isHovered ? rotSign * 8 : rotSign * 5
             transformStyle = `translate(${tx}px, ${ty}px) rotate(${rot}deg) scale(0.94)`
             zIndex = 5
-            opacity = 0.68
+            opacity = 0.72
             filter = isHovered ? 'brightness(0.82)' : 'brightness(0.68)'
           }
-
-          if (offset > 2) return null
 
           return (
             <div
               key={idx}
-              className="absolute inset-0 rounded-3xl overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg)] shadow-xl transition-all duration-500 ease-out"
+              className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border border-[var(--card-border)] bg-[var(--card-bg)] transition-all duration-400 ease-out"
               style={{
                 transform: transformStyle,
                 zIndex,
@@ -124,29 +78,28 @@ function InternshipImageStack({
                 src={img}
                 alt={`${title} - foto ${idx + 1}`}
                 draggable={false}
-                className="w-full h-full object-cover transition-transform duration-500"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
             </div>
           )
         })}
 
-        {/* Floating pill badge: Image indicator + click hint */}
-        <div className="absolute bottom-4 right-4 z-30 pointer-events-none">
-          <div className="bg-black/65 backdrop-blur-md text-white/95 px-3.5 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-2 shadow-xl border border-white/15 group-hover:bg-black/85 transition-all">
-            <span className="font-sans font-medium">
-              {activeIndex + 1} / {images.length}
-            </span>
-            <span className="opacity-40">•</span>
-            <span className="text-[10px] tracking-wider uppercase text-emerald-400 font-semibold group-hover:translate-x-0.5 transition-transform flex items-center gap-1 font-sans">
-              Klik Foto
+        {/* Floating pill: Click to shuffle next */}
+        <div className="absolute top-4 right-4 z-30 pointer-events-none">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 dark:bg-black/75 backdrop-blur-md border border-white/20 text-white text-[11px] font-medium shadow-lg">
+            <span>{activeIndex + 1} / {images.length}</span>
+            <span className="opacity-60">•</span>
+            <span className="text-[10px] opacity-80 group-hover:opacity-100 flex items-center gap-1">
+              Ganti foto
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polyline points="9 18 15 12 9 6" />
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </span>
           </div>
         </div>
 
-        {/* Thumbnail Dots on bottom left */}
+        {/* Dots indicator at bottom */}
         <div className="absolute bottom-4 left-4 z-30 flex items-center gap-1.5 pointer-events-auto">
           {images.map((_, i) => (
             <button
@@ -170,6 +123,47 @@ function InternshipImageStack({
 }
 
 export default function WorkGallery() {
+  const { t } = useLanguage()
+
+  const internships = [
+    {
+      number: '01',
+      role: t('work.1.role'),
+      institution: 'CV. Pangan Berkah Sentosa (PBS)',
+      location: 'Jawa Timur, Indonesia',
+      period: 'Februari — Maret 2025',
+      subtitle: t('work.1.sub'),
+      description: t('work.1.desc'),
+      tags: ['Line 4 Production', 'Process Observation', 'Raw Material Prep', 'Food Manufacturing', 'Packaging Process', 'SOP Compliance'],
+      images: ['/projects/production.jpg', '/projects/biofarma-industry.jpg', '/projects/pharmacy-qc.jpg'],
+      align: 'right' as const,
+    },
+    {
+      number: '02',
+      role: t('work.2.role'),
+      institution: 'CV. Pangan Berkah Sentosa (PBS)',
+      location: 'Jawa Timur, Indonesia',
+      period: 'Februari — Maret 2025',
+      subtitle: t('work.2.sub'),
+      description: t('work.2.desc'),
+      tags: ['FMEA Analysis', 'Defect Identification', 'Leakage & Hole Reduction', 'Risk Priority Number (RPN)', 'Root Cause Analysis', 'Quality Assurance'],
+      images: ['/projects/pharmacy-qc.jpg', '/projects/rfid-system.jpg', '/projects/production.jpg'],
+      align: 'left' as const,
+    },
+    {
+      number: '03',
+      role: t('work.3.role'),
+      institution: 'CV. Pangan Berkah Sentosa (PBS)',
+      location: 'Jawa Timur, Indonesia',
+      period: 'Februari — Maret 2025',
+      subtitle: t('work.3.sub'),
+      description: t('work.3.desc'),
+      tags: ['Yield Monitoring', 'Reject Rate Reduction', 'Dough Scrap Analysis', 'Production Efficiency', 'Team Coordination', 'Continuous Improvement'],
+      images: ['/projects/biofarma-industry.jpg', '/projects/production.jpg', '/projects/docutrack.jpg'],
+      align: 'right' as const,
+    },
+  ]
+
   return (
     <section id="work" className="relative py-24 px-4 md:px-8 overflow-hidden font-sans">
       {/* Background Waves */}
@@ -186,20 +180,20 @@ export default function WorkGallery() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold font-sans">
-              PENGALAMAN INDUSTRI & MANUFAKTUR
+              {t('work.label')}
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight font-sans">
-              <TypewriterTitle text="Pengalaman Magang" />
+              <TypewriterTitle text={t('work.title')} />
             </h2>
             <p className="text-[var(--muted)] text-sm md:text-base max-w-xl font-sans">
-              Pengalaman magang di industri manufaktur pangan, berfokus pada analisis proses produksi Line 4, Failure Mode and Effect Analysis (FMEA), yield & reject monitoring, serta peningkatan kualitas berkelanjutan.
+              {t('work.subtitle')}
             </p>
           </div>
           <a
             href="/projects"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--foreground)] text-[var(--background)] text-xs font-semibold tracking-wider hover:opacity-90 transition-opacity shrink-0 w-max font-sans"
           >
-            LIHAT DETAIL PORTOFOLIO →
+            {t('work.cta')}
           </a>
         </div>
 

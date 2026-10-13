@@ -1,8 +1,11 @@
 'use client'
 
 import TypewriterTitle from './TypewriterTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Contact() {
+  const { t } = useLanguage()
+
   const contactChannels = [
     {
       id: '01',
@@ -19,7 +22,7 @@ export default function Contact() {
     },
     {
       id: '02',
-      label: 'WHATSAPP & TELEPON',
+      label: t('contact.phone'),
       value: '+62 821-3169-4485',
       href: 'https://wa.me/6282131694485?text=Halo%20Stefani,%20saya%20melihat%20portofolio%20Anda',
       isLink: true,
@@ -43,7 +46,7 @@ export default function Contact() {
     },
     {
       id: '04',
-      label: 'DOMISILI',
+      label: t('contact.location'),
       value: 'Malang, Jawa Timur, Indonesia',
       href: '#',
       isLink: false,
@@ -62,19 +65,19 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left side */}
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">KONTAK</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">{t('contact.label')}</p>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] mb-8 tracking-tight">
               <TypewriterTitle
-                text={"LET'S\nWORK\nTOGETHER"}
+                text={t('contact.title')}
                 className="whitespace-pre-line"
               />
             </h2>
             <p className="text-lg md:text-xl font-bold mb-3 text-[var(--foreground)]">
-              Industrial Engineer — Quality & Continuous Improvement First.
+              {t('contact.tagline')}
             </p>
             <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed mb-10 max-w-lg">
-              Terbuka untuk peluang karir dan kolaborasi di bidang Production Engineering, Quality Control, Process Improvement, Supply Chain, serta operasional industri manufaktur.
+              {t('contact.desc')}
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -83,7 +86,7 @@ export default function Contact() {
                 download
                 className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[var(--foreground)] text-[var(--background)] text-sm font-bold tracking-wider hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md"
               >
-                DOWNLOAD CV
+                {t('contact.cv')}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="7 10 12 15 17 10" />
@@ -95,7 +98,7 @@ export default function Contact() {
                 href="mailto:winatastefani178@gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] text-sm font-semibold hover:border-[var(--muted)] hover:bg-[var(--foreground)]/5 transition-all"
               >
-                Kirim Email Langsung →
+                {t('contact.email')}
               </a>
             </div>
           </div>

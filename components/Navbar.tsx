@@ -3,15 +3,16 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const mainLinks = [
-  { label: 'TENTANG SAYA', href: '/#about' },
-  { label: 'PENDIDIKAN', href: '/#education' },
-  { label: 'ORGANISASI', href: '/#trainings' },
-  { label: 'MAGANG', href: '/#work' },
-  { label: 'SERTIFIKASI', href: '/#awards' },
-  { label: 'TEKNIS', href: '/#skills' },
-  { label: 'PERSONAL & SOFTWARE', href: '/#personal-skills' },
+const mainLinkKeys = [
+  { key: 'nav.about', id: 'about', href: '/#about' },
+  { key: 'nav.education', id: 'education', href: '/#education' },
+  { key: 'nav.org', id: 'trainings', href: '/#trainings' },
+  { key: 'nav.work', id: 'work', href: '/#work' },
+  { key: 'nav.awards', id: 'awards', href: '/#awards' },
+  { key: 'nav.skills', id: 'skills', href: '/#skills' },
+  { key: 'nav.personal', id: 'personal-skills', href: '/#personal-skills' },
 ]
 
 const projectLinks = [
@@ -20,6 +21,7 @@ const projectLinks = [
 ]
 
 export default function Navbar() {
+  const { t, lang, setLang } = useLanguage()
   const pathname = usePathname()
   const isProjectSection = pathname?.startsWith('/projects')
   const [activeProjectTab, setActiveProjectTab] = useState('technical')
@@ -41,8 +43,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isProjectSection])
 
-  const currentLinks = isProjectSection ? projectLinks : mainLinks
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (isProjectSection) return
 
@@ -53,15 +53,16 @@ export default function Navbar() {
         e.preventDefault()
         const navOffset = 85
         const elementPos = targetEl.getBoundingClientRect().top + window.pageYOffset
-        window.scrollTo({
-          top: elementPos - navOffset,
-          behavior: 'smooth',
-        })
+        window.scrollTo({ top: elementPos - navOffset, behavior: 'smooth' })
         window.history.pushState(null, '', `/#${targetId}`)
         if (mobileMenuOpen) setMobileMenuOpen(false)
       }
     }
   }
+
+  const currentLinks = isProjectSection
+    ? projectLinks.map(l => ({ label: l.label, href: l.href }))
+    : mainLinkKeys.map(l => ({ label: t(l.key), href: l.href, id: l.id }))
 
   return (
     <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-6xl">
@@ -84,13 +85,19 @@ export default function Navbar() {
           <span className="font-semibold text-xs sm:text-sm tracking-wider hidden sm:block">STEFANI</span>
         </a>
 
-        {/* Desktop Links (All uniform) */}
+        {/* Desktop Links */}
         <div className="hidden lg:flex items-center justify-center flex-1 gap-1.5 xl:gap-3 2xl:gap-4 px-1 xl:px-3">
           {currentLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
+              onClick={(e) => {
+                if (isProjectSection) {
+                  setActiveProjectTab(link.label.toLowerCase())
+                } else {
+                  handleNavClick(e, link.href)
+                }
+              }}
               className={`whitespace-nowrap text-[10.5px] xl:text-[11.5px] tracking-wider font-semibold px-2 py-1 rounded-full transition-all hover:text-[var(--foreground)] ${
                 isProjectSection && link.label.toLowerCase() === activeProjectTab
                   ? 'text-[var(--foreground)] bg-[var(--foreground)]/10'
@@ -103,14 +110,26 @@ export default function Navbar() {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-2 shrink-0 pl-3 lg:pr-1">
+        <div className="flex items-center gap-1.5 shrink-0 pl-3 lg:pr-1">
+          {/* Language Toggle */}
+          <button
+            onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
+            className="flex items-center gap-0.5 px-2.5 py-1.5 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all text-[10px] font-bold tracking-widest"
+            title={lang === 'id' ? 'Switch to English' : 'Ganti ke Indonesia'}
+            aria-label="Toggle language"
+          >
+            <span className={`transition-all ${lang === 'id' ? 'text-emerald-500' : 'text-[var(--muted)]'}`}>ID</span>
+            <span className="text-[var(--muted)] mx-0.5 font-light">|</span>
+            <span className={`transition-all ${lang === 'en' ? 'text-emerald-500' : 'text-[var(--muted)]'}`}>EN</span>
+          </button>
+
           <ThemeToggle />
           <a
             href="/#contact"
             onClick={(e) => handleNavClick(e, '/#contact')}
             className="whitespace-nowrap px-4 sm:px-5 py-2 text-xs font-semibold tracking-wider rounded-full bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 transition-opacity shadow-sm"
           >
-            Hubungi Saya
+            {t('nav.contact')}
           </a>
           {/* Mobile hamburger */}
           <button
@@ -147,6 +166,17 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <div className="pt-2 border-t border-[var(--card-border)] flex items-center gap-3 px-3 py-2">
+              <span className="text-[10px] text-[var(--muted)] font-semibold tracking-widest uppercase">Bahasa / Language:</span>
+              <button
+                onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
+                className="flex items-center gap-1 text-[10px] font-bold tracking-widest border border-[var(--card-border)] rounded-full px-2.5 py-1 hover:border-emerald-500/50 transition-all"
+              >
+                <span className={lang === 'id' ? 'text-emerald-500' : 'text-[var(--muted)]'}>ID</span>
+                <span className="text-[var(--muted)]">|</span>
+                <span className={lang === 'en' ? 'text-emerald-500' : 'text-[var(--muted)]'}>EN</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

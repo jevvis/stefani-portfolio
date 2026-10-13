@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import TypewriterTitle from './TypewriterTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const certifications = [
   { title: 'Gold Medal (Environmental Science) — GYIIF 2025', event: 'IYSA', year: '2025' },
@@ -353,6 +354,7 @@ const techIcons = [
 ]
 
 export function SkillsSection() {
+  const { t } = useLanguage()
   return (
     <section id="skills" className="relative py-24 px-4 md:px-8 overflow-hidden">
       {/* Background Waves */}
@@ -368,12 +370,13 @@ export function SkillsSection() {
         
         {/* Left Side: Title & Icons */}
         <div className="lg:col-span-4 flex flex-col justify-center">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">KOMPETENSI SAYA</p>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">{t('skills.label')}</p>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-            <TypewriterTitle text="Kemampuan Teknis" />
+            <TypewriterTitle text={t('skills.title')} />
           </h2>
           <p className="text-[var(--muted)] text-sm leading-relaxed mb-10 max-w-sm">
-            <span className="text-emerald-500 font-medium">Menggabungkan</span> kompetensi teknik industri, quality control, supply chain, dan process improvement untuk meningkatkan efisiensi dan kualitas operasional.
+            <span className="text-emerald-500 font-medium">{t('skills.desc').split(' ')[0]}</span>{' '}
+            {t('skills.desc').split(' ').slice(1).join(' ')}
           </p>
           
           <div className="grid grid-cols-4 gap-3 max-w-[240px]">
@@ -396,7 +399,7 @@ export function SkillsSection() {
           <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-8 md:p-10 flex flex-col hover:border-[var(--muted)] transition-colors">
             <div className="flex justify-between items-start mb-10">
               <span className="text-5xl md:text-6xl font-light text-[var(--muted)]">01</span>
-              <span className="text-right text-[10px] tracking-[0.2em] uppercase max-w-[140px] text-[var(--muted)] font-semibold leading-relaxed">PRODUKSI<br/>&<br/>KUALITAS</span>
+              <span className="text-right text-[10px] tracking-[0.2em] uppercase max-w-[140px] text-[var(--muted)] font-semibold leading-relaxed">{t('skills.card1.tag')}</span>
             </div>
             <div className="w-14 h-14 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center mb-8 shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--foreground)]">
@@ -404,7 +407,7 @@ export function SkillsSection() {
               </svg>
             </div>
             <p className="text-[var(--muted)] text-sm leading-loose mb-10 grow">
-              Menganalisis proses produksi, identifikasi defect menggunakan FMEA, pemantauan yield & reject produk, quality risk analysis, serta koordinasi dengan tim Produksi dan Quality Control untuk rekomendasi perbaikan.
+              {t('skills.card1.desc')}
             </p>
             <div className="flex flex-wrap gap-2">
               {['Quality Control', 'FMEA', 'Yield Monitoring', 'Defect Identification', 'Risk Analysis', 'Process Analysis', 'GMP', 'Production Line', 'QC Testing', 'Reject Monitoring'].map(badge => (
@@ -419,7 +422,7 @@ export function SkillsSection() {
           <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-8 md:p-10 flex flex-col hover:border-[var(--muted)] transition-colors">
             <div className="flex justify-between items-start mb-10">
               <span className="text-5xl md:text-6xl font-light text-[var(--muted)]">02</span>
-              <span className="text-right text-[10px] tracking-[0.2em] uppercase max-w-[140px] text-[var(--muted)] font-semibold leading-relaxed">SUPPLY CHAIN<br/>&<br/>IMPROVEMENT</span>
+              <span className="text-right text-[10px] tracking-[0.2em] uppercase max-w-[140px] text-[var(--muted)] font-semibold leading-relaxed">{t('skills.card2.tag')}</span>
             </div>
             <div className="w-14 h-14 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center mb-8 shrink-0">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--foreground)]">
@@ -427,7 +430,7 @@ export function SkillsSection() {
               </svg>
             </div>
             <p className="text-[var(--muted)] text-sm leading-loose mb-10 grow">
-              Pemahaman mendalam tentang Supply Chain Management, inventory management, warehouse management, serta process improvement menggunakan pendekatan Lean Manufacturing, Kaizen, dan analisis data untuk keputusan berbasis data.
+              {t('skills.card2.desc')}
             </p>
             <div className="flex flex-wrap gap-2">
               {['Supply Chain', 'Inventory Management', 'Warehouse Management', 'Lean Manufacturing', 'Kaizen', 'PPC', 'AutoCAD', 'SketchUp', 'Python', 'MS Visio'].map(badge => (
@@ -508,13 +511,15 @@ function AnimatedCounter({
 }
 
 export function AboutSection() {
+  const { t } = useLanguage()
+
   const traitsData = [
     {
       id: '01',
-      title: 'Analitis',
-      subtitle: 'Data-Driven Mindset',
-      tag: 'FMEA & Statistika',
-      desc: 'Menganalisis proses manufaktur dan data produksi untuk mengidentifikasi akar masalah serta memetakan prioritas risiko mutu.',
+      title: t('trait.1.title'),
+      subtitle: t('trait.1.sub'),
+      tag: t('trait.1.tag'),
+      desc: t('trait.1.desc'),
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="20" x2="18" y2="10" />
@@ -526,10 +531,10 @@ export function AboutSection() {
     },
     {
       id: '02',
-      title: 'Teliti',
-      subtitle: 'Quality & Precision First',
-      tag: 'Zero Defect Focus',
-      desc: 'Memastikan akurasi tinggi dalam pemantauan yield & reject produk, verifikasi SOP, dan pengawasan standar mutu produksi.',
+      title: t('trait.2.title'),
+      subtitle: t('trait.2.sub'),
+      tag: t('trait.2.tag'),
+      desc: t('trait.2.desc'),
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -540,10 +545,10 @@ export function AboutSection() {
     },
     {
       id: '03',
-      title: 'Adaptif',
-      subtitle: 'Agile & Collaborative',
-      tag: 'Cepat Belajar',
-      desc: 'Cepat beradaptasi dengan ritme lantai pabrik yang dinamis, koordinasi tim lintas fungsi, dan penerapan teknologi baru.',
+      title: t('trait.3.title'),
+      subtitle: t('trait.3.sub'),
+      tag: t('trait.3.tag'),
+      desc: t('trait.3.desc'),
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
@@ -553,10 +558,10 @@ export function AboutSection() {
     },
     {
       id: '04',
-      title: 'Inovatif',
-      subtitle: 'Continuous Improvement',
-      tag: 'Lean & Kaizen',
-      desc: 'Mengusung pola pikir perbaikan berkelanjutan untuk mengeliminasi pemborosan proses dan mendorong efisiensi kerja.',
+      title: t('trait.4.title'),
+      subtitle: t('trait.4.sub'),
+      tag: t('trait.4.tag'),
+      desc: t('trait.4.desc'),
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
@@ -594,9 +599,9 @@ export function AboutSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">TENTANG SAYA</p>
+        <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">{t('about.label')}</p>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16 tracking-tight">
-          <TypewriterTitle text="Industrial Engineer. Quality First." />
+          <TypewriterTitle text={t('about.title')} />
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 relative">
@@ -616,15 +621,15 @@ export function AboutSection() {
                 </div>
                 <div className="flex flex-wrap gap-x-8 gap-y-4">
                   <div>
-                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">IPK</p>
+                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">{t('about.ipk')}</p>
                     <p className="text-sm font-bold">3.62/4.00</p>
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">TOEFL Score</p>
+                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">{t('about.toefl')}</p>
                     <p className="text-sm font-bold">557</p>
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">Angkatan</p>
+                    <p className="text-[10px] tracking-widest text-[var(--muted)] uppercase mb-1 font-semibold">{t('about.year')}</p>
                     <p className="text-sm font-bold">2022</p>
                   </div>
                 </div>
@@ -633,23 +638,26 @@ export function AboutSection() {
 
             {/* Bio */}
             <p className="text-[var(--muted)] text-sm md:text-base leading-loose mb-6 text-justify">
-              Mahasiswi Teknik Industri Universitas Brawijaya dengan pengalaman di bidang produksi, analisis proses, dan peningkatan kualitas melalui program magang di industri pangan. Berpengalaman dalam menganalisis proses produksi, memahami Production Planning & Control (PPC), Quality Control, Process Improvement, Supply Chain, dan Inventory Management. Meraih Gold Medal dalam kompetisi Engineering dan Environmental Science, dengan komitmen kuat untuk mengembangkan karir di bidang Industrial Engineering, Produksi, Kualitas, dan Supply Chain.
+              {t('about.bio1')}
             </p>
             <p className="text-[var(--muted)] text-sm md:text-base leading-loose mb-12">
-              Ingin tahu lebih lanjut? <a href="/CV_STEFANI.pdf" target="_blank" rel="noopener noreferrer" className="text-[var(--foreground)] font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">Download CV saya</a>.
+              {t('about.cv.prompt')}{' '}
+              <a href="/CV_STEFANI.pdf" target="_blank" rel="noopener noreferrer" className="text-[var(--foreground)] font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
+                {t('about.cv.link')}
+              </a>.
             </p>
 
             {/* Currently */}
             <div>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-6 font-semibold">FOKUS SAAT INI</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-6 font-semibold">{t('about.current.label')}</p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-8">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[var(--card-bg)] border border-[var(--card-border)] flex items-center justify-center shrink-0 text-[var(--muted)] shadow-sm">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                   </div>
                   <div>
-                    <p className="text-sm font-bold">Quality Control</p>
-                    <p className="text-xs text-[var(--muted)]">FMEA & Process Analysis</p>
+                    <p className="text-sm font-bold">{t('about.current.1.title')}</p>
+                    <p className="text-xs text-[var(--muted)]">{t('about.current.1.sub')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -657,8 +665,8 @@ export function AboutSection() {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 3v2M15 3v2M10 5a2 2 0 0 0-2 2v7.74a2 2 0 0 1-.2.87L5.33 21h13.34l-2.47-5.39a2 2 0 0 1-.2-.87V7a2 2 0 0 0-2-2h-4z"></path></svg>
                   </div>
                   <div>
-                    <p className="text-sm font-bold">Supply Chain</p>
-                    <p className="text-xs text-[var(--muted)]">Inventory & Warehouse</p>
+                    <p className="text-sm font-bold">{t('about.current.2.title')}</p>
+                    <p className="text-xs text-[var(--muted)]">{t('about.current.2.sub')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -666,8 +674,8 @@ export function AboutSection() {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
                   </div>
                   <div>
-                    <p className="text-sm font-bold">Lean & Kaizen</p>
-                    <p className="text-xs text-[var(--muted)]">Continuous Improvement</p>
+                    <p className="text-sm font-bold">{t('about.current.3.title')}</p>
+                    <p className="text-xs text-[var(--muted)]">{t('about.current.3.sub')}</p>
                   </div>
                 </div>
               </div>
@@ -681,7 +689,7 @@ export function AboutSection() {
             <div 
               className="relative w-64 sm:w-72 min-h-[350px] cursor-pointer group"
               onClick={handleCardClick}
-              title="Klik untuk melihat karakter kerja lainnya"
+              title={t('trait.hint')}
             >
               {/* Back Card 2 (Layer 3) */}
               <div 
@@ -734,7 +742,7 @@ export function AboutSection() {
                   </div>
 
                   <p className="text-[9px] tracking-[0.25em] uppercase text-white/50 mb-1.5 font-semibold">
-                    KARAKTER KERJA
+                    {t('trait.card.label')}
                   </p>
                   <h3 className="text-3xl font-extrabold text-white tracking-tight mb-1">
                     {currentTrait.title}
@@ -764,7 +772,7 @@ export function AboutSection() {
                   </div>
 
                   <div className="flex items-center gap-1 text-[10px] tracking-wider uppercase font-semibold text-white/50 group-hover:text-emerald-400 transition-colors">
-                    <span>Ganti</span>
+                    <span>{t('trait.change')}</span>
                     <span className="text-xs">↻</span>
                   </div>
                 </div>
@@ -782,7 +790,7 @@ export function AboutSection() {
             </svg>
           </div>
           <blockquote className="text-xl sm:text-2xl md:text-3xl font-serif italic tracking-wide text-[var(--foreground)] leading-relaxed group-hover:text-emerald-400 transition-colors duration-300">
-            &ldquo;Berinovasi dengan data, berkontribusi dengan kualitas, berkembang dengan konsistensi.&rdquo;
+            {t('about.quote')}
           </blockquote>
           <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-teal-400 mx-auto mt-6 rounded-full group-hover:w-36 transition-all duration-500"></div>
         </div>
@@ -796,11 +804,11 @@ export function AboutSection() {
                 <AnimatedCounter end={3.6} decimals={1} suffix="+" duration={1600} />
               </div>
               <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors block">
-                IPK KUMULATIF
+                {t('metric.ipk')}
               </span>
             </div>
             <p className="text-[11px] text-[var(--muted)] mt-3 pt-3 border-t border-[var(--card-border)]/40 opacity-80 group-hover:opacity-100 transition-opacity">
-              Prestasi akademik konsisten (3.62 / 4.00)
+              {t('metric.ipk.sub')}
             </p>
           </div>
 
@@ -811,11 +819,11 @@ export function AboutSection() {
                 <AnimatedCounter end={3} decimals={0} suffix="x" duration={1400} />
               </div>
               <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors block">
-                GOLD MEDAL IYSA
+                {t('metric.medal')}
               </span>
             </div>
             <p className="text-[11px] text-[var(--muted)] mt-3 pt-3 border-t border-[var(--card-border)]/40 opacity-80 group-hover:opacity-100 transition-opacity">
-              Ajang internasional GYIIF & ISPC 2025
+              {t('metric.medal.sub')}
             </p>
           </div>
 
@@ -826,11 +834,11 @@ export function AboutSection() {
                 <AnimatedCounter end={4} decimals={0} suffix="+" duration={1500} />
               </div>
               <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors block">
-                KEGIATAN ORGANISASI
+                {t('metric.org')}
               </span>
             </div>
             <p className="text-[11px] text-[var(--muted)] mt-3 pt-3 border-t border-[var(--card-border)]/40 opacity-80 group-hover:opacity-100 transition-opacity">
-              Kepengurusan & kepanitiaan HMTI UB
+              {t('metric.org.sub')}
             </p>
           </div>
 
@@ -841,11 +849,11 @@ export function AboutSection() {
                 <AnimatedCounter end={557} decimals={0} suffix="" duration={1800} />
               </div>
               <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors block">
-                TOEFL SCORE
+                {t('metric.toefl')}
               </span>
             </div>
             <p className="text-[11px] text-[var(--muted)] mt-3 pt-3 border-t border-[var(--card-border)]/40 opacity-80 group-hover:opacity-100 transition-opacity">
-              Kemahiran bahasa Inggris profesional
+              {t('metric.toefl.sub')}
             </p>
           </div>
         </div>
@@ -854,25 +862,27 @@ export function AboutSection() {
   )
 }
 export function EducationSection() {
+  const { t } = useLanguage()
+
   const educationList = [
     {
       number: '01',
-      institution: 'Universitas Brawijaya',
-      program: 'Sarjana Teknik Industri',
-      degree: 'Sarjana Teknik (S.T.)',
+      institution: t('education.institution'),
+      program: t('education.program'),
+      degree: t('education.degree'),
       period: '2022 — 2026',
       gpa: '3.62 / 4.00',
       gpaLabel: 'GPA',
-      status: 'Aktif — Semester 7',
-      description: 'Mendalami ilmu Teknik Industri mencakup Production Planning & Control (PPC), Quality Control & Improvement, Supply Chain Management, Inventory Management, serta analisis sistem manufaktur dan proses industri.',
+      status: t('education.status'),
+      description: t('education.desc'),
       image: '/projects/production.jpg',
-      imageTag: 'TEKNIK INDUSTRI UB',
-      imageCaption: 'Pendidikan Akademik, Riset Industri & Kegiatan Organisasi',
+      imageTag: t('education.tag'),
+      imageCaption: t('education.caption'),
       highlights: [
-        'Magang Production Intern di CV. Pangan Berkah Sentosa — analisis FMEA & yield monitoring',
-        'Meraih 3x Gold Medal IYSA di kompetisi sains internasional (Engineering & Environmental Science)',
-        'Aktif sebagai Event Staff, Secretary Staff, dan Logistics Staff di 4 kegiatan organisasi kampus',
-        'Penguasaan tools: MS Office (Excellent Grade), AutoCAD, SketchUp, Python, Google Workspace',
+        t('education.h1'),
+        t('education.h2'),
+        t('education.h3'),
+        t('education.h4'),
       ],
     },
   ]
@@ -890,9 +900,9 @@ export function EducationSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-12 md:mb-16">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold font-sans">RIWAYAT AKADEMIK</p>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold font-sans">{t('education.label')}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-sans">
-            <TypewriterTitle text="Pendidikan" />
+            <TypewriterTitle text={t('education.title')} />
           </h2>
         </div>
 
@@ -946,7 +956,7 @@ export function EducationSection() {
                         {edu.program}
                       </h3>
                       <p className="text-xs md:text-sm font-semibold font-sans text-[var(--muted)] mt-1">
-                        Gelar: <span className="text-[var(--foreground)] font-bold">{edu.degree}</span>
+                        {t('education.degreeLabel')}: <span className="text-[var(--foreground)] font-bold">{edu.degree}</span>
                       </p>
                     </div>
 
@@ -957,7 +967,7 @@ export function EducationSection() {
                     {/* Competency Highlights */}
                     <div className="space-y-2.5 pt-5 border-t border-[var(--card-border)]">
                       <p className="text-[10px] font-sans tracking-widest uppercase font-semibold text-[var(--muted)] mb-3">
-                        Kompetensi & Aktivitas Utama
+                        {t('education.highlights.label')}
                       </p>
                       {edu.highlights.map((item, hIdx) => (
                         <div key={hIdx} className="flex items-start gap-2.5 text-xs md:text-sm font-sans text-[var(--foreground)] opacity-90">
@@ -1021,56 +1031,57 @@ export function EducationSection() {
   )
 }
 
-const certificationsList = [
-  {
-    id: 1,
-    title: 'Gold Medal — GYIIF 2025 (Environmental Science)',
-    issuer: 'Indonesian Young Scientist Association (IYSA)',
-    year: '2025',
-    category: 'KOMPETISI INTERNASIONAL',
-    description: 'Penghargaan medali emas kategori Environmental Science pada ajang Global Youth Invention and Innovation Fair (GYIIF) 2025 yang diselenggarakan oleh IYSA.',
-    image: '/projects/sertifikat-kompetensi.png',
-  },
-  {
-    id: 2,
-    title: 'Gold Medal — ISPC 2025 (Engineering Category)',
-    issuer: 'Indonesian Young Scientist Association (IYSA)',
-    year: '2025',
-    category: 'KOMPETISI INTERNASIONAL',
-    description: 'Penghargaan medali emas kategori Engineering pada Indonesia Science Project Competition (ISPC) 2025 untuk karya inovasi teknik industri dan sistem manufaktur.',
-    image: '/projects/hospital-pharmacy.jpg',
-  },
-  {
-    id: 3,
-    title: 'Gold Medal — ISPC 2025 (Environmental Science)',
-    issuer: 'Indonesian Young Scientist Association (IYSA)',
-    year: '2025',
-    category: 'KOMPETISI INTERNASIONAL',
-    description: 'Penghargaan medali emas kategori Environmental Science pada ajang Indonesia Science Project Competition (ISPC) 2025 atas riset keberlanjutan lingkungan dan industri ramah lingkungan.',
-    image: '/projects/biofarma-industry.jpg',
-  },
-  {
-    id: 4,
-    title: 'Microsoft Office Desktop Application Competency',
-    issuer: 'Trust Training Partners',
-    year: '2026',
-    category: 'SERTIFIKASI KOMPETENSI',
-    description: 'Sertifikasi kompetensi aplikasi desktop Microsoft Office dengan predikat Excellent Grade, menguasai pengolahan data spreadsheet lanjutan, pemodelan analisis, dan dokumentasi.',
-    image: '/projects/kimiafarma-apotek.jpg',
-  },
-  {
-    id: 5,
-    title: 'Test of English Language Proficiency (TOEFL Score: 557)',
-    issuer: 'Royal English / PT. Royal Raya Indonesia',
-    year: '2026',
-    category: 'KEMAHIRAN BAHASA',
-    description: 'Sertifikasi kemahiran bahasa Inggris standar internasional dengan skor TOEFL 557, mendukung komunikasi profesional, literatur teknik global, dan konferensi internasional.',
-    image: '/projects/ui-organization.jpg',
-  },
-]
-
 export function AwardsSection() {
+  const { t } = useLanguage()
   const [activeAwardIndex, setActiveAwardIndex] = useState(0)
+
+  const certificationsList = [
+    {
+      id: 1,
+      title: t('award.1.title'),
+      issuer: t('award.1.issuer'),
+      year: '2025',
+      category: t('award.1.cat'),
+      description: t('award.1.desc'),
+      image: '/projects/sertifikat-kompetensi.png',
+    },
+    {
+      id: 2,
+      title: t('award.2.title'),
+      issuer: t('award.2.issuer'),
+      year: '2025',
+      category: t('award.2.cat'),
+      description: t('award.2.desc'),
+      image: '/projects/hospital-pharmacy.jpg',
+    },
+    {
+      id: 3,
+      title: t('award.3.title'),
+      issuer: t('award.3.issuer'),
+      year: '2025',
+      category: t('award.3.cat'),
+      description: t('award.3.desc'),
+      image: '/projects/biofarma-industry.jpg',
+    },
+    {
+      id: 4,
+      title: t('award.4.title'),
+      issuer: t('award.4.issuer'),
+      year: '2026',
+      category: t('award.4.cat'),
+      description: t('award.4.desc'),
+      image: '/projects/kimiafarma-apotek.jpg',
+    },
+    {
+      id: 5,
+      title: t('award.5.title'),
+      issuer: t('award.5.issuer'),
+      year: '2026',
+      category: t('award.5.cat'),
+      description: t('award.5.desc'),
+      image: '/projects/ui-organization.jpg',
+    },
+  ]
 
   const getCardStyle = (offset: number) => {
     if (offset === 0) {
@@ -1143,13 +1154,13 @@ export function AwardsSection() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-8 gap-4">
           <div>
             <p className="text-xs tracking-[0.3em] uppercase text-[var(--muted)] mb-3 font-semibold font-sans">
-              PRESTASI & SERTIFIKASI
+              {t('awards.label')}
             </p>
             <h2 className="text-4xl md:text-5xl font-bold mb-3 font-sans">
-              <TypewriterTitle text="Prestasi & Sertifikasi" />
+              <TypewriterTitle text={t('awards.title')} />
             </h2>
             <p className="text-[var(--muted)] text-sm max-w-md font-sans">
-              Penghargaan medali emas pada kompetisi riset sains internasional (IYSA), sertifikasi kompetensi Microsoft Office, dan kemahiran bahasa Inggris (TOEFL).
+              {t('awards.sub')}
             </p>
           </div>
           <a
@@ -1158,7 +1169,7 @@ export function AwardsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--foreground)] text-[var(--background)] text-sm font-medium hover:opacity-90 transition-colors shrink-0"
           >
-            Buka Dokumen
+            {t('awards.openDoc')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />
@@ -1217,7 +1228,7 @@ export function AwardsSection() {
             {certificationsList[activeAwardIndex].title}
           </h3>
           <p className="text-xs md:text-sm font-semibold text-[var(--muted)] mb-2 font-sans">
-            Penerbit: {certificationsList[activeAwardIndex].issuer}
+            {t('awards.issuer')}: {certificationsList[activeAwardIndex].issuer}
           </p>
           <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed mb-4 max-w-2xl mx-auto font-sans">
             {certificationsList[activeAwardIndex].description}
@@ -1228,7 +1239,7 @@ export function AwardsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-semibold underline underline-offset-4 hover:opacity-75 transition-opacity font-sans text-[var(--foreground)]"
           >
-            Lihat Dokumen Asli →
+            {t('awards.viewOriginal')}
           </a>
         </div>
       </div>
@@ -1237,50 +1248,47 @@ export function AwardsSection() {
 }
 
 export function TrainingsSection() {
+  const { t } = useLanguage()
   const [hoveredOrgId, setHoveredOrgId] = useState<number | null>(null)
 
   const organizations = [
     {
       id: 1,
-      role: 'Event Staff',
-      institution: 'ICLASS 2024 — HMTI Universitas Brawijaya',
+      role: t('org.1.role'),
+      institution: t('org.1.inst'),
       location: 'Malang, Jawa Timur',
       period: 'Juni — Des 2024',
-      description:
-        'Mendukung persiapan dan pelaksanaan rangkaian kegiatan ICLASS 2024 sesuai dengan timeline dan tanggung jawab panitia. Mengkoordinasikan kebutuhan teknis acara bersama anggota panitia dan divisi terkait untuk memastikan kesiapan operasional acara.',
+      description: t('org.1.desc'),
       tags: ['Event Management', 'Technical Coordination', 'Timeline Execution', 'HMTI UB'],
       type: 'event',
     },
     {
       id: 2,
-      role: 'Secretary Staff',
-      institution: 'ICOEMIS 2024 (International Conference)',
+      role: t('org.2.role'),
+      institution: t('org.2.inst'),
       location: 'Malang, Jawa Timur',
       period: 'Sep — Okt 2024',
-      description:
-        'Mendukung kegiatan administratif dan kesekretariatan sepanjang persiapan dan implementasi International Conference on Engineering and Management in Industrial System. Berkoordinasi dengan anggota panitia untuk pemenuhan dokumentasi dan persyaratan administrasi.',
+      description: t('org.2.desc'),
       tags: ['International Conference', 'Administrative Support', 'Secretarial Duties', 'Documentation'],
       type: 'conference',
     },
     {
       id: 3,
-      role: 'Secretary Staff',
-      institution: 'INVENT 2024 — HMTI Universitas Brawijaya',
+      role: t('org.3.role'),
+      institution: t('org.3.inst'),
       location: 'Malang, Jawa Timur',
       period: 'Juni — Des 2024',
-      description:
-        'Mendukung kegiatan administratif dan kesekretariatan sepanjang persiapan dan pelaksanaan acara tahunan INVENT (Industrial Event) yang diselenggarakan oleh Himpunan Mahasiswa Teknik Industri Universitas Brawijaya.',
+      description: t('org.3.desc'),
       tags: ['Administrative', 'Secretarial Support', 'Event Planning', 'HMTI UB'],
       type: 'invent',
     },
     {
       id: 4,
-      role: 'Logistics Staff',
-      institution: 'ENC 2024 — KBM FT Universitas Brawijaya',
+      role: t('org.4.role'),
+      institution: t('org.4.inst'),
       location: 'Malang, Jawa Timur',
       period: 'Apr — Juni 2024',
-      description:
-        'Mendukung persiapan dan pemenuhan kebutuhan logistik, perlengkapan, serta sarana prasarana selama masa persiapan dan pelaksanaan acara ENC oleh Keluarga Besar Mahasiswa Fakultas Teknik Universitas Brawijaya.',
+      description: t('org.4.desc'),
       tags: ['Logistics & Inventory', 'Equipment Procurement', 'KBM FT UB', 'Operational Support'],
       type: 'logistics',
     },
@@ -1324,14 +1332,14 @@ export function TrainingsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold font-sans">
-              PENGALAMAN KEPEMIMPINAN & ORGANISASI
+              {t('trainings.label')}
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-sans">
-              <TypewriterTitle text="Pengalaman Organisasi" />
+              <TypewriterTitle text={t('trainings.title')} />
             </h2>
           </div>
           <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--card-bg)] border border-[var(--card-border)] text-xs font-semibold tracking-wider text-[var(--muted)] shrink-0 w-max font-sans">
-            UNIVERSITAS BRAWIJAYA
+            {t('trainings.campus')}
           </span>
         </div>
 
@@ -1540,13 +1548,15 @@ export function TrainingsSection() {
 }
 
 export function PersonalSkillsSection() {
+  const { t } = useLanguage()
+
   const softSkills = [
-    { title: 'Analitis & Kritis', desc: 'Kemampuan kuat dalam menganalisis data produksi, evaluasi yield/reject, dan pemecahan masalah berbasis data.' },
-    { title: 'Detail & Teliti', desc: 'Akurasi tinggi dalam identifikasi cacat kualitas (defect) serta mitigasi risiko proses menggunakan metode FMEA.' },
-    { title: 'Komunikatif & Kolaboratif', desc: 'Komunikasi proaktif dalam tim lintas fungsi antara divisi Produksi, Quality Control, dan manajemen.' },
-    { title: 'Continuous Improvement', desc: 'Mindset berorientasi pada peningkatan kualitas berkelanjutan, efisiensi operasional, dan eliminasi waste.' },
-    { title: 'Adaptif & Cepat Belajar', desc: 'Tangkas memahami alur kerja lini manufaktur, sistem industri modern, dan implementasi teknologi baru.' },
-    { title: 'Manajemen Waktu & Organisasi', desc: 'Terbukti handal mengelola tanggung jawab akademis, magang industri, dan kepanitiaan organisasi secara simultan.' },
+    { title: t('personal.soft.1.t'), desc: t('personal.soft.1.d') },
+    { title: t('personal.soft.2.t'), desc: t('personal.soft.2.d') },
+    { title: t('personal.soft.3.t'), desc: t('personal.soft.3.d') },
+    { title: t('personal.soft.4.t'), desc: t('personal.soft.4.d') },
+    { title: t('personal.soft.5.t'), desc: t('personal.soft.5.d') },
+    { title: t('personal.soft.6.t'), desc: t('personal.soft.6.d') },
   ]
 
   const softwareSkills = [
@@ -1593,12 +1603,12 @@ export function PersonalSkillsSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-16">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">KOMPETENSI PERSONAL & DIGITAL</p>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">{t('personal.label')}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            <TypewriterTitle text="Kemampuan Personal & Software" />
+            <TypewriterTitle text={t('personal.title')} />
           </h2>
           <p className="text-[var(--muted)] text-sm md:text-base max-w-xl">
-            Karakteristik kerja analitis berorientasi pada peningkatan kualitas berkelanjutan serta penguasaan software pendukung analisis data, gambar teknik, dan dokumentasi manufaktur.
+            {t('personal.sub')}
           </p>
         </div>
 
@@ -1609,9 +1619,9 @@ export function PersonalSkillsSection() {
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--card-border)]">
                 <div>
                   <span className="text-[10px] font-sans tracking-widest uppercase text-emerald-500 font-semibold block mb-1">
-                    INTERPERSONAL & KARAKTER
+                    {t('personal.soft.label')}
                   </span>
-                  <h3 className="text-2xl font-bold">Kemampuan Personal</h3>
+                  <h3 className="text-2xl font-bold">{t('personal.soft.title')}</h3>
                 </div>
                 <div className="w-12 h-12 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center text-emerald-500">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1635,8 +1645,8 @@ export function PersonalSkillsSection() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-[var(--card-border)] flex items-center justify-between text-xs text-[var(--muted)]">
-              <span>Orientasi: Continuous Improvement</span>
-              <span className="font-sans text-emerald-500 font-semibold">100% Quality & Safety</span>
+              <span>{t('personal.orientation')}</span>
+              <span className="font-sans text-emerald-500 font-semibold">{t('personal.quality')}</span>
             </div>
           </div>
 
@@ -1646,9 +1656,9 @@ export function PersonalSkillsSection() {
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--card-border)]">
                 <div>
                   <span className="text-[10px] font-sans tracking-widest uppercase text-emerald-500 font-semibold block mb-1">
-                    DIGITAL & PRODUKTIVITAS
+                    {t('personal.hard.label')}
                   </span>
-                  <h3 className="text-2xl font-bold">Penguasaan Software</h3>
+                  <h3 className="text-2xl font-bold">{t('personal.hard.title')}</h3>
                 </div>
                 <div className="w-12 h-12 rounded-2xl bg-[var(--background)] border border-[var(--card-border)] flex items-center justify-center text-emerald-500 font-bold">
                   💻
@@ -1674,8 +1684,8 @@ export function PersonalSkillsSection() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-[var(--card-border)] flex items-center justify-between text-xs text-[var(--muted)]">
-              <span>Aplikasi: Produksi, CAD, Spreadsheet & Dokumentasi</span>
-              <span className="font-sans text-emerald-500 font-semibold">Siap Digunakan</span>
+              <span>{t('personal.app')}</span>
+              <span className="font-sans text-emerald-500 font-semibold">{t('personal.ready')}</span>
             </div>
           </div>
         </div>

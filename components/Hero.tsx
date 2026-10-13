@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useRef, MouseEvent } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Hero() {
+  const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [rotate, setRotate] = useState({ x: 0, y: 0 })
@@ -96,7 +98,7 @@ export default function Hero() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 shadow-[0_0_8px_#34d399]" />
               <div className="text-left font-sans">
                 <p className="text-xs sm:text-sm font-bold tracking-wide text-white whitespace-nowrap">
-                  Teknik Industri UB
+                  {t('hero.badge.major')}
                 </p>
               </div>
             </div>
@@ -119,10 +121,10 @@ export default function Hero() {
               <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0 shadow-[0_0_8px_#fbbf24]" />
               <div className="text-left font-sans">
                 <p className="text-xs sm:text-sm font-bold tracking-wide text-white whitespace-nowrap">
-                  3x Gold Medalist
+                  {t('hero.badge.medal')}
                 </p>
                 <p className="text-[10px] text-amber-400 font-semibold">
-                  GYIIF & ISPC 2025
+                  {t('hero.badge.event')}
                 </p>
               </div>
             </div>
@@ -173,7 +175,7 @@ export default function Hero() {
           className="text-[10px] tracking-[0.3em] font-medium text-[var(--muted)] uppercase"
           style={{ writingMode: 'vertical-rl' }}
         >
-          SCROLL DOWN
+          {t('hero.scroll')}
         </span>
       </div>
     </section>
