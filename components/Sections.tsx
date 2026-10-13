@@ -1562,28 +1562,24 @@ export function PersonalSkillsSection() {
   const softwareSkills = [
     {
       name: 'Microsoft Excel',
-      level: 'Mahir / Advanced',
       Icon: ExcelLogo,
       color: 'border-emerald-500/20 bg-emerald-500/10',
       description: 'Pengolahan data produksi, pemantauan yield & reject, kalkulasi FMEA (RPN), rekapitulasi data operasional, dan pemodelan statistik.',
     },
     {
       name: 'Microsoft Word & Visio',
-      level: 'Mahir / Advanced',
       Icon: WordLogo,
       color: 'border-blue-500/20 bg-blue-500/10',
       description: 'Penyusunan resume laporan teknis, Standard Operating Procedure (SOP), dokumentasi proses manufaktur, dan pemetaan diagram alir alur kerja.',
     },
     {
       name: 'Canva & Visual Design',
-      level: 'Kreatif / Intermediate',
       Icon: CanvaLogo,
       color: 'border-purple-500/20 bg-purple-500/10',
       description: 'Pembuatan infografis teknis, visualisasi pelaporan manajerial, pamflet edukasi, dan media presentasi hasil evaluasi kualitas.',
     },
     {
       name: 'AutoCAD & SketchUp (Engineering Tools)',
-      level: 'Kompeten / User',
       Icon: CadLogo,
       color: 'border-red-500/20 bg-red-500/10',
       description: 'Perancangan gambar teknik 2D/3D, pemodelan tata letak fasilitas pabrik (plant layout), visualisasi sistem manufaktur, dan analisis dasar Python.',
@@ -1672,9 +1668,8 @@ export function PersonalSkillsSection() {
                       <sw.Icon className="w-7 h-7 shrink-0" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline justify-between gap-2 mb-1">
+                      <div className="mb-1">
                         <h4 className="font-bold text-sm md:text-base text-[var(--foreground)]">{sw.name}</h4>
-                        <span className="text-[10px] font-sans uppercase tracking-wider text-emerald-500 font-semibold shrink-0">{sw.level}</span>
                       </div>
                       <p className="text-xs text-[var(--muted)] leading-relaxed">{sw.description}</p>
                     </div>
